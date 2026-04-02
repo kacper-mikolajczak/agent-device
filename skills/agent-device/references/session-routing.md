@@ -4,6 +4,17 @@
 
 Open this file when one run must stay pinned to one session or device across many commands, when multiple concurrent runs share a host, or when you need scoped device discovery.
 
+## Quick decision guide
+
+| Situation | What to do |
+| --- | --- |
+| Single local run on one obvious device | Stay in [bootstrap-install.md](bootstrap-install.md) |
+| Many commands must stay on one chosen session | Use session lock here |
+| Shared host with multiple concurrent runs | Use scoped discovery here |
+| Remote daemon or tenant-scoped host control | Switch to [remote-tenancy.md](remote-tenancy.md) |
+
+If you do not need one of those cases, leave this file and keep the default bootstrap path.
+
 ## Session-bound automation
 
 Use this when an orchestrator must keep plain CLI calls on one session and device.

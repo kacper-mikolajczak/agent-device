@@ -167,6 +167,7 @@ Command-only flags (like `find --first`) that don't flow to the platform layer o
 - For behavior/CLI surface changes, evaluate docs/skills updates.
 - Update `README.md` and relevant `website/docs/**` pages for command behavior/flags/aliases/workflows.
 - Update relevant `skills/**/SKILL.md` when usage examples/workflow recommendations change.
+- When iterating on `skills/agent-device/**`, review [docs/agent-device-top-50-checklist.md](docs/agent-device-top-50-checklist.md) and check for regressions in routing, first-step guidance, and fallback coverage across those task families.
 - Keep skill docs task-first:
   - top-level `SKILL.md` should stay a thin router, not a full manual.
   - keep detailed workflows/troubleshooting in a `references/` folder instead of growing the router.

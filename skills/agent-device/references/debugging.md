@@ -130,6 +130,23 @@ grep -n -E "SIGABRT|SIGSEGV|EXC_|fatal|exception|terminated|killed|jetsam|memory
 - Android: if the app log is not enough, use `adb logcat` for `FATAL EXCEPTION`, `Abort message`, or `signal` lines around process death.
 - If no crash signature appears in app logs, stop collecting broad logs and switch to the platform-native crash source.
 
+## Crash triage branch guide
+
+Use this when the app terminated, vanished, or became unresponsive and you need the next debugging step quickly.
+
+1. Confirm whether the app actually died, or whether the UI just stopped updating.
+2. Check `logs path` and grep for a crash signature first.
+3. If you see `SIGABRT`, `SIGSEGV`, `EXC_*`, `FATAL EXCEPTION`, `Abort message`, or similar, treat it as a real crash and switch to the platform-native crash source immediately.
+4. If the app is still alive but the UI tree is empty or stale, treat it as a UI-state or AX-sync problem first, not a crash.
+5. If the app disappeared after a permission prompt, route through the alert and permissions path before escalating.
+6. If the process restarted after relaunch, narrow the log window to the latest repro instead of reading broad historical logs.
+
+Minimal branch examples:
+
+- App vanished after tap on iOS: `logs path` -> grep crash terms -> inspect `~/Library/Logs/DiagnosticReports`
+- App vanished after tap on Android: `logs path` -> grep crash terms -> use `adb logcat` around process death
+- App still foregrounded but `snapshot` is empty: return to the AX/tree guidance above instead of calling it a crash
+
 ## When to leave this file
 
 - Return to [exploration.md](exploration.md) once the app is stable again.

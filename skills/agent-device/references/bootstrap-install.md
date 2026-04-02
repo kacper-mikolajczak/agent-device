@@ -10,15 +10,29 @@ Use this order when you are not sure about the target or installed app identifie
 
 1. `devices`
 2. `apps`
-3. `ensure-simulator`
+3. If you chose an iOS simulator target and it may not exist or be booted yet: `ensure-simulator`
 4. `open`
 5. `session list`
 
 On Android dev builds in particular, `apps` is cheaper than guessing package suffixes and retrying failed `open` calls.
+Do not run `ensure-simulator` for Android, physical-device, TV, or macOS starts.
 
 ## Most common mistake to avoid
 
 Do not start acting before you have pinned the correct target and opened an `app` session. In mixed-device environments, always pass `--device`, `--udid`, or `--serial` while choosing the target.
+
+## Target selection quick guide
+
+| Situation | Default choice |
+| --- | --- |
+| Local iOS QA or feature work | iOS simulator |
+| Physical-device-only behavior | iOS or Android physical device |
+| Android dev build and package uncertainty | `apps`, then `open` by discovered package |
+| TV app flow | `--target tv` with the correct platform |
+| Desktop app flow | `open <app> --platform macos` |
+| Shared host or multiple concurrent runs | open [session-routing.md](session-routing.md) before proceeding |
+
+If the target is still uncertain after `devices` and `apps`, do not continue into exploration yet.
 
 ## Open-first rule
 
@@ -38,6 +52,22 @@ Do not start acting before you have pinned the correct target and opened an `app
 - For iOS `.ipa` files, `<app>` is used as the bundle id or bundle name hint when the archive contains multiple app bundles.
 - After install or reinstall, later use `open <app>` with the exact discovered or known package or bundle identifier, not the artifact path.
 - Do not use `open <apk|aab> --relaunch` on Android.
+
+## Clean relaunch path
+
+Use a clean relaunch when stale runtime state is more likely than a real product failure.
+
+- Prefer `open <app> --relaunch` for normal dev loops.
+- Prefer `reinstall <app> <path>` only when you need uninstall-plus-install, not as a first reaction to every failure.
+- If the app was already open in the wrong state, close or relaunch it before exploring deeper.
+- After relaunch, confirm the session with `session list` or a fresh `snapshot` before continuing.
+
+Example:
+
+```bash
+agent-device --session auth open MyApp --platform ios --relaunch
+agent-device --session auth snapshot
+```
 
 ## Common starting points
 
@@ -67,6 +97,24 @@ agent-device install com.example.app ./build/MyApp.app --platform ios --device "
 - TV targets: use `--target tv` together with `--platform` when the task is for tvOS or Android TV.
 - Android binary flow: use `install` or `reinstall` for `.apk` or `.aab`, then open by installed package name.
 - macOS desktop app flow: use `open <app> --platform macos`. Only load [macos-desktop.md](macos-desktop.md) if a desktop surface or macOS-specific behavior matters.
+
+## Deep links and direct routing
+
+Use deep links when the task is to land directly on a known route instead of navigating there manually.
+
+- On iOS, use `open <url>` when the app should be chosen by the platform from the deep link alone.
+- On iOS, use `open <app> <url>` when you need to force one app session and deliver the deep link into it.
+- This reference only guarantees the iOS deep-link forms above. If the task needs platform-specific Android routing behavior beyond normal `open`, do not assume the same syntax without checking product support first.
+- If the app is already open in the correct session, prefer the app-scoped form so the route lands in the intended session.
+- After any deep-link launch, verify the landing screen with `snapshot`, `snapshot -i`, `get`, or `is` before assuming the route succeeded.
+- If the deep link is the task target, do not spend tokens manually navigating to the same screen first.
+
+Example:
+
+```bash
+agent-device open MyApp myapp://settings/privacy --platform ios --relaunch
+agent-device snapshot
+```
 
 ## Session basics
 

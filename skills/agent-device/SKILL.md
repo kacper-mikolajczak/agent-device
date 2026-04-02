@@ -34,9 +34,9 @@ Use bootstrap to pin the correct target, app, and session. Use exploration once 
 
 ## Golden paths
 
-1. Normal interaction: bootstrap -> exploration -> verification only if you need proof.
+1. Normal interaction: bootstrap if needed -> exploration -> verification only if you need proof.
 2. RN warning during interaction: exploration -> dismiss warning -> continue without re-snapshotting -> debugging only if it keeps returning or becomes the task.
-3. QA from acceptance criteria: bootstrap -> exploration -> [references/qa.md](references/qa.md).
+3. QA from acceptance criteria: bootstrap if needed -> exploration -> [references/qa.md](references/qa.md).
 4. Bug hunt with reporting: switch to [../dogfood/SKILL.md](../dogfood/SKILL.md).
 5. Accessibility audit: bootstrap if needed -> exploration -> [references/accessibility.md](references/accessibility.md).
 6. Stable scripted flow: bootstrap if needed -> exploration -> [references/batch.md](references/batch.md).

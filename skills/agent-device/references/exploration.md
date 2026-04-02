@@ -23,6 +23,9 @@ Open this file when the app session is already running and you need to inspect t
 - Need proof image: `screenshot`
 - Need to dismiss the keyboard: `keyboard dismiss`
 - Need Android keyboard visibility or input-type state: `keyboard status` or `keyboard get`
+- Need slower search-as-you-type input: `type --delay-ms <ms>`
+- Need bounded manual scrolling: `scroll <direction> --pixels <n>`
+- Need explicit back behavior: `back --in-app` or `back --system`
 
 ## Read-only first
 
@@ -54,6 +57,7 @@ Open this file when the app session is already running and you need to inspect t
 - If `scrollintoview @ref` succeeds, prefer the returned `currentRef` for the next action.
 - Visible-first off-screen summaries are intentionally compact. If you need the full off-screen tree instead of a short summary, retry with `snapshot --raw`.
 - Cap long searches with `--max-scrolls <n>` when the list may be unbounded or the target may not exist.
+- Use `scroll <direction> --pixels <n>` when you need one bounded manual scroll distance instead of search-driven `scrollintoview`.
 - For tap interactions, `press` is canonical and `click` is an equivalent alias.
 
 ## Text entry rules
@@ -63,9 +67,17 @@ Open this file when the app session is already running and you need to inspect t
 - Use `fill @ref "text"` when you need to target a field directly by ref.
 - Use `press @ref`, then `type "text"` when the field is already focused and you need append semantics.
 - Do not write `type @ref "text"`; `type` only accepts text and will not target that ref for you.
+- If search-as-you-type or debounced inputs drop characters, retry with `type --delay-ms <ms>` after focusing the field.
 - If the keyboard blocks the next control after text entry, prefer `keyboard dismiss` instead of backing out of the screen.
 - On iOS, `keyboard dismiss` depends on the active app session, so do not rely on it after closing or without `open`.
+- On Android, `keyboard dismiss` can fail when the current IME only supports dismissal through back navigation. If that happens, tap a safe empty area instead of using `back` unless navigation is intended.
 - Do not use `fill` or `type` just to make the app reveal information that is not currently visible unless the user asked for that interaction.
+
+## Back navigation
+
+- Prefer `back --in-app` when you mean the app's own back control or navigation stack.
+- Use `back --system` only when you intentionally want platform back behavior.
+- Do not rely on bare `back` when the distinction matters for the task.
 
 ## Interaction fallbacks
 
