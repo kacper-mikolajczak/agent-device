@@ -109,3 +109,9 @@ agent-device perf --json
 - Android app sessions also expose `memory` (`dumpsys meminfo`) and `cpu` (`dumpsys cpuinfo`) snapshots when the session has an app package context.
 - Apple app sessions on macOS and iOS simulators also expose `memory` and `cpu` process snapshots when the session has an app bundle ID.
 - `fps` is still unavailable, and physical iOS devices still leave `memory` and `cpu` unavailable in this release.
+
+## When to leave this file
+
+- Return to [exploration.md](exploration.md) if you still need to reach or stabilize the target UI state.
+- Return to [batch.md](batch.md) if you want to run a known stable multi-step flow rather than capture or maintain artifacts after the fact.
+- Switch to [debugging.md](debugging.md) if the verification task turns into log, alert, permission, or crash triage.

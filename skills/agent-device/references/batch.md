@@ -57,6 +57,13 @@ agent-device batch --session sim --platform ios --steps-file /tmp/batch-steps.js
 - `AMBIGUOUS_MATCH`: refine the selector or locator, then retry the failed step.
 - `COMMAND_FAILED`: add sync guards and retry from the failing step.
 
+## Response handling
+
+- Success returns fields such as `total`, `executed`, `totalDurationMs`, and `results[]`.
+- Human-mode `batch` runs also print a short per-step success summary.
+- Failed runs include `details.step`, `details.command`, `details.executed`, and `details.partialResults`.
+- Replan from the first failing step instead of rerunning the whole flow blindly.
+
 ## When to leave this file
 
 - Return to [exploration.md](exploration.md) if the flow is no longer stable enough for `batch`.

@@ -101,6 +101,13 @@ agent-device --session auth press @e3
 agent-device --session auth close
 ```
 
+Bad shared-host pattern:
+
+```bash
+agent-device --session auth open Settings --platform ios --device "iPhone 17 Pro"
+agent-device --session auth snapshot -i --platform ios --device "iPhone 17 Pro"
+```
+
 ## When to leave this file
 
 - Once the correct target and session are pinned, move to [exploration.md](exploration.md).

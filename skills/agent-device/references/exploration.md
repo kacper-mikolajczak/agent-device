@@ -23,11 +23,6 @@ Open this file when the app session is already running and you need to inspect t
 - Need proof image: `screenshot`
 - Need to dismiss the keyboard: `keyboard dismiss`
 - Need Android keyboard visibility or input-type state: `keyboard status` or `keyboard get`
-- Need logs, alerts, or failure triage: switch to [debugging.md](debugging.md)
-- Need proof artifacts, replay maintenance, or performance checks: switch to [verification.md](verification.md)
-- Need QA from acceptance criteria: switch to [qa.md](qa.md)
-- Need accessibility-gap auditing: switch to [accessibility.md](accessibility.md)
-- Need `batch` for a known stable flow: switch to [batch.md](batch.md)
 
 ## Read-only first
 

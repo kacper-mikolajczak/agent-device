@@ -26,3 +26,8 @@ agent-device click 120 240
 - iOS uses device points.
 - Android uses pixels.
 - Use screenshots to reason about coordinates before acting.
+
+## When to leave this file
+
+- Return to [exploration.md](exploration.md) once you can switch back to selector or `@ref` targeting.
+- Return to [macos-desktop.md](macos-desktop.md) if the coordinate problem is specific to macOS surfaces rather than general mobile targeting.

@@ -41,6 +41,8 @@ Use bootstrap to pin the correct target, app, and session. Use exploration once 
 5. Accessibility audit: bootstrap if needed -> exploration -> [references/accessibility.md](references/accessibility.md).
 6. Stable scripted flow: bootstrap if needed -> exploration -> [references/batch.md](references/batch.md).
 
+Treat transient React Native warnings as part of the normal interaction path. Switch to debugging only when the warning keeps returning or becomes the thing you need to investigate.
+
 ## QA modes
 
 - Open-ended bug hunt with reporting: use [../dogfood/SKILL.md](../dogfood/SKILL.md).
