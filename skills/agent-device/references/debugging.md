@@ -17,7 +17,7 @@ Open this file when the task turns into failure triage, logs, network inspection
 
 Do not leave logging on for normal flows or dump full log files into context. Keep debug windows short and inspect logs with `grep` or `tail`.
 
-In React Native dev or debug builds, do not dismiss visible warning or error overlays without remembering to report them later. If you close one to keep the flow moving, keep at least a screenshot or a short marked log window so the summary can name it.
+For the normal React Native warning flow, follow [exploration.md](exploration.md). If you are already in a debug window and dismiss a visible warning or error overlay to keep the flow moving, keep at least a screenshot or a short marked log window so the summary can name it.
 
 ## Canonical loop
 
@@ -72,7 +72,7 @@ grep -n -E "agent-device.*mark|before tap" <path>
 tail -50 <path>
 ```
 
-If the app showed a visible warning or error overlay during the flow:
+If the app showed a visible warning or error overlay during a debug run:
 
 - Prefer a narrow grep window around your `logs mark` lines instead of loading the whole file.
 - Mention the surfaced warning or error in the final summary even if it did not block completion.
