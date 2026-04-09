@@ -43,6 +43,31 @@ After setup is confirmed or completed, move to `exploration.md` before doing UI 
 
 These are examples, not required exact sequences. Use the smallest setup flow that matches the task.
 
+## Expo Go on iOS simulators
+
+Expo Go works, but it is a two-phase setup rather than a normal single-app open:
+
+1. Open `Expo Go` as the session app.
+2. Let Expo Go reach its launcher screen.
+3. Use `snapshot -i` and `press @ref` to choose the correct development server entry such as `Device Lab, http://localhost:8084`.
+4. Re-snapshot after the app loads. Do not assume the first foreground screen after `open Expo Go` is your app.
+
+Useful pattern:
+
+```bash
+agent-device --session expo open "Expo Go" --platform ios --device "iPhone 17 Pro" --relaunch
+agent-device --session expo snapshot -i
+agent-device --session expo press @e22
+agent-device --session expo snapshot -i
+```
+
+Operational notes:
+
+- If Expo asks for a different Metro port, accept it, then choose the matching launcher entry inside Expo Go instead of assuming the previous port is still correct.
+- The first iOS `snapshot` in an Expo Go session can pay the XCUITest runner build cost. If you want to remove that first-run penalty before interactive testing, run `pnpm build:xcuitest:ios` from the repo root first.
+- During runner attach, the foreground app can briefly become `AgentDeviceRunner`. If a later `snapshot` lands on the runner shell instead of Expo Go or the target app, reopen `Expo Go` in the same session and continue from the launcher.
+- Keep the named session open through the whole Expo Go flow. Do not retarget with extra `--device` or `--platform` flags on follow-up commands once the session is pinned.
+
 ### Boot a simulator and open an app
 
 ```bash

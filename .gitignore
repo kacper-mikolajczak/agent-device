@@ -27,3 +27,4 @@ xcuserdata/
 *.app
 *.xctestrun
 *.xcarchive
+.skillgym-results/

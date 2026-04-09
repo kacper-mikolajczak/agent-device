@@ -32,7 +32,7 @@ final class RunnerTests: XCTestCase {
   static let defaultRecordingFps: Int32 = 15
   var listener: NWListener?
   var doneExpectation: XCTestExpectation?
-  let app = XCUIApplication()
+  lazy var app = XCUIApplication()
   lazy var springboard = XCUIApplication(bundleIdentifier: Self.springboardBundleId)
   var currentApp: XCUIApplication?
   var currentBundleId: String?
@@ -88,12 +88,22 @@ final class RunnerTests: XCTestCase {
   @MainActor
   func testCommand() throws {
     doneExpectation = expectation(description: "agent-device command handled")
-    app.launch()
-    currentApp = app
     let queue = DispatchQueue(label: "agent-device.runner")
     let desiredPort = RunnerEnv.resolvePort()
+    let desiredHost = RunnerEnv.resolveBindHost()
     NSLog("AGENT_DEVICE_RUNNER_DESIRED_PORT=%d", desiredPort)
-    listener = try makeRunnerListener(desiredPort: desiredPort)
+    if let desiredHost {
+      NSLog("AGENT_DEVICE_RUNNER_BIND_HOST=%@", desiredHost)
+    } else {
+      NSLog("AGENT_DEVICE_RUNNER_BIND_HOST=default")
+    }
+    if let metroProxyBaseUrl = RunnerEnv.resolveMetroProxyBaseUrl() {
+      NSLog(
+        "AGENT_DEVICE_RUNNER_METRO_PROXY_BASE_URL=%@",
+        RunnerEnv.redactUrlForLog(metroProxyBaseUrl)
+      )
+    }
+    listener = try makeRunnerListener(desiredPort: desiredPort, desiredHost: desiredHost)
     listener?.stateUpdateHandler = { [weak self] state in
       switch state {
       case .ready:
@@ -128,17 +138,24 @@ final class RunnerTests: XCTestCase {
     }
   }
 
-  private func makeRunnerListener(desiredPort: UInt16) throws -> NWListener {
+  private func makeRunnerListener(desiredPort: UInt16, desiredHost: String?) throws -> NWListener {
+    let parameters = NWParameters.tcp
+    parameters.allowLocalEndpointReuse = true
     if desiredPort > 0, let port = NWEndpoint.Port(rawValue: desiredPort) {
+      if let desiredHost, !desiredHost.isEmpty {
+        parameters.requiredLocalEndpoint = .hostPort(host: NWEndpoint.Host(desiredHost), port: port)
+        return try NWListener(using: parameters)
+      }
       #if os(macOS)
-        let parameters = NWParameters.tcp
-        parameters.allowLocalEndpointReuse = true
         parameters.requiredLocalEndpoint = .hostPort(host: "127.0.0.1", port: port)
         return try NWListener(using: parameters)
       #else
-        return try NWListener(using: .tcp, on: port)
+        return try NWListener(using: parameters, on: port)
       #endif
     }
-    return try NWListener(using: .tcp)
+    if let desiredHost, !desiredHost.isEmpty {
+      parameters.requiredLocalEndpoint = .hostPort(host: NWEndpoint.Host(desiredHost), port: 0)
+    }
+    return try NWListener(using: parameters)
   }
 }

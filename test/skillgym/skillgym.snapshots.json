@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "entries": {
+    "catalog-add-to-cart::codex-main": {
+      "caseId": "catalog-add-to-cart",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 32593,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:19.725Z"
+    },
+    "catalog-favorite-toggle::codex-main": {
+      "caseId": "catalog-favorite-toggle",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 36223,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:58.488Z"
+    },
+    "catalog-filter-bakery::codex-main": {
+      "caseId": "catalog-filter-bakery",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 17564,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:57.462Z"
+    },
+    "catalog-scroll-footer::codex-main": {
+      "caseId": "catalog-scroll-footer",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 20559,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:56.559Z"
+    },
+    "catalog-search-debounce::codex-main": {
+      "caseId": "catalog-search-debounce",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 20650,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:04.800Z"
+    },
+    "form-keyboard-dismiss::codex-main": {
+      "caseId": "form-keyboard-dismiss",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 18876,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:52.734Z"
+    },
+    "form-reset::codex-main": {
+      "caseId": "form-reset",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 32958,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:53.498Z"
+    },
+    "form-success-submit::codex-main": {
+      "caseId": "form-success-submit",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 33477,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:53.498Z"
+    },
+    "form-validation-errors::codex-main": {
+      "caseId": "form-validation-errors",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 33584,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:50.846Z"
+    },
+    "home-accessibility-audit::codex-main": {
+      "caseId": "home-accessibility-audit",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 18340,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:03.241Z"
+    },
+    "home-confirm-alert::codex-main": {
+      "caseId": "home-confirm-alert",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 23149,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:55.352Z"
+    },
+    "home-dismiss-notice::codex-main": {
+      "caseId": "home-dismiss-notice",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 735150,
+      "agentType": "codex",
+      "model": "gpt-5",
+      "updatedAt": "2026-04-08T18:24:49.652Z"
+    },
+    "home-refresh-metrics::codex-main": {
+      "caseId": "home-refresh-metrics",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 37588,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:28.455Z"
+    },
+    "home-toggle-online::codex-main": {
+      "caseId": "home-toggle-online",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 19128,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:55.958Z"
+    },
+    "open-and-snapshot::codex-main": {
+      "caseId": "open-and-snapshot",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 508414,
+      "agentType": "codex",
+      "model": "gpt-5",
+      "updatedAt": "2026-04-09T08:22:37.180Z"
+    },
+    "product-note-append::codex-main": {
+      "caseId": "product-note-append",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 14944,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:50.746Z"
+    },
+    "product-open-details::codex-main": {
+      "caseId": "product-open-details",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 21938,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:02.903Z"
+    },
+    "product-quantity::codex-main": {
+      "caseId": "product-quantity",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 13809,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:49.631Z"
+    },
+    "product-save-to-cart::codex-main": {
+      "caseId": "product-save-to-cart",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 15155,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:53.332Z"
+    },
+    "settings-diagnostics-error::codex-main": {
+      "caseId": "settings-diagnostics-error",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 17003,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:53.832Z"
+    },
+    "settings-diagnostics-retry::codex-main": {
+      "caseId": "settings-diagnostics-retry",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 17301,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:50.486Z"
+    },
+    "settings-reset-alert::codex-main": {
+      "caseId": "settings-reset-alert",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 27943,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:13:03.804Z"
+    },
+    "settings-toggle-preferences::codex-main": {
+      "caseId": "settings-toggle-preferences",
+      "runnerId": "codex-main",
+      "metric": "totalTokens",
+      "value": 16698,
+      "agentType": "codex",
+      "model": "gpt-5.4-mini",
+      "updatedAt": "2026-04-09T10:12:54.924Z"
+    }
+  }
+}

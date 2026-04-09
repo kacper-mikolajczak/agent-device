@@ -109,6 +109,10 @@ agent-device alert accept
 ## Common failure patterns
 
 - `snapshot` returns 0 nodes: the app may no longer be foregrounded or the UI is not stable yet. Re-open the app or retry when state settles.
+- On iOS with Expo Go, the first `snapshot` can spend time attaching the runner even after the app itself is visibly open. If the command looks stuck, check for runner progress before assuming the snapshot is dead:
+  - `pnpm build:xcuitest:ios` to front-load the runner build
+  - `tail -n 80 ~/.agent-device/daemon.log` to confirm `ios_runner_connect` retries or runner attach progress
+  - reopen `Expo Go` in the same session if the foreground app was left on `AgentDeviceRunner`
 - Logs are empty: confirm you opened an app session before `logs clear --restart`.
 - Android logs look stale after relaunch: retry the repro window after the process rebinds.
 - Android accessibility snapshots can lag behind visible screen transitions. The next snapshot now retries briefly after navigation-sensitive actions, but if the tree still looks stale, use `screenshot` as visual truth, wait briefly, then re-run `snapshot -i`.

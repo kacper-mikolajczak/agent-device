@@ -58,6 +58,7 @@ export const RUNNER_DESTINATION_TIMEOUT_SECONDS = resolveTimeoutSeconds(
   20,
   5,
 );
+const RUNNER_AUTH_TOKEN = process.env.AGENT_DEVICE_RUNNER_AUTH_TOKEN?.trim() || undefined;
 
 export async function waitForRunner(
   device: DeviceInfo,
@@ -104,7 +105,7 @@ export async function waitForRunner(
               endpoint,
               {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: buildRunnerHeaders(),
                 body: JSON.stringify(command),
               },
               Math.min(RUNNER_CONNECT_REQUEST_TIMEOUT_MS, remainingMs),
@@ -267,7 +268,7 @@ async function postCommandViaSimulator(
   timeoutMs: number,
 ): Promise<{ status: number; body: string }> {
   const payload = JSON.stringify(command);
-  const args = buildSimctlArgsForDevice(device, [
+  const curlArgs = [
     'spawn',
     device.id,
     '/usr/bin/curl',
@@ -276,10 +277,12 @@ async function postCommandViaSimulator(
     'POST',
     '-H',
     'Content-Type: application/json',
-    '--data',
-    payload,
-    `http://127.0.0.1:${port}/command`,
-  ]);
+  ];
+  if (RUNNER_AUTH_TOKEN) {
+    curlArgs.push('-H', `Authorization: Bearer ${RUNNER_AUTH_TOKEN}`);
+  }
+  curlArgs.push('--data', payload, `http://127.0.0.1:${port}/command`);
+  const args = buildSimctlArgsForDevice(device, curlArgs);
   const result = await runCmd('xcrun', args, { allowFailure: true, timeoutMs });
   const body = result.stdout as string;
   if (result.exitCode !== 0) {
@@ -336,4 +339,12 @@ export function cleanupTempFile(filePath: string): void {
   } catch {
     // ignore
   }
+}
+
+function buildRunnerHeaders(): Record<string, string> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (RUNNER_AUTH_TOKEN) {
+    headers.Authorization = `Bearer ${RUNNER_AUTH_TOKEN}`;
+  }
+  return headers;
 }
